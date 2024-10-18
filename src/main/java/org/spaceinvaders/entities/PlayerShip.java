@@ -1,9 +1,77 @@
 package org.spaceinvaders.entities;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.Collided;
+import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.Direction;
+import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
+import com.github.hanyaeger.api.scenes.SceneBorder;
+import com.github.hanyaeger.api.userinput.KeyListener;
+import javafx.scene.input.KeyCode;
 
-public class PlayerShip extends Ship {
-    public PlayerShip(String resource, Coordinate2D initialLocation) {
+import java.util.Set;
+
+public class PlayerShip extends Ship implements KeyListener, SceneBorderTouchingWatcher {
+    private final int upperLimit;
+
+    public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize) {
         super(resource, initialLocation);
+        int movementHeight = 200;
+        this.upperLimit = (int) (gameSize.height() - movementHeight);
+    }
+
+    @Override
+    public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
+        if (pressedKeys.contains(KeyCode.W)) {
+            if (getLocationInScene().getY() > upperLimit) {
+                if (pressedKeys.contains(KeyCode.D)) {
+                    setMotion(3, Direction.UP_RIGHT);
+                } else if (pressedKeys.contains(KeyCode.A)) {
+                    setMotion(3, Direction.UP_LEFT);
+                } else {
+                    setMotion(3, Direction.UP);
+                }
+            } else {
+                // Stop the motion.
+                setMotion(0, 0);
+            }
+        } else if (pressedKeys.contains(KeyCode.S)) {
+            if (pressedKeys.contains(KeyCode.D)) {
+                setMotion(3, Direction.DOWN_RIGHT);
+            } else if (pressedKeys.contains(KeyCode.A)) {
+                setMotion(3, Direction.DOWN_LEFT);
+            } else {
+                setMotion(3, Direction.DOWN);
+            }
+        } else if (pressedKeys.contains(KeyCode.A)) {
+            setMotion(3, Direction.LEFT);
+        } else if (pressedKeys.contains(KeyCode.D)) {
+            setMotion(3, Direction.RIGHT);
+        } else if (pressedKeys.isEmpty()) {
+            // Stop the motion.
+            setMotion(0,0);
+        }
+    }
+
+    @Override
+    public void notifyBoundaryTouching(SceneBorder sceneBorder) {
+            setSpeed(0);
+
+            switch(sceneBorder){
+                case TOP:
+                    setAnchorLocationY(1);
+                    break;
+                case BOTTOM:
+                    setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+                    break;
+                case LEFT:
+                    setAnchorLocationX(1);
+                    break;
+                case RIGHT:
+                    setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+                default:
+                    break;
+            }
     }
 }
