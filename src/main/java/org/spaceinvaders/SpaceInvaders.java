@@ -9,6 +9,8 @@ import org.spaceinvaders.scenes.GameScene;
  *
  */
 public class SpaceInvaders extends YaegerGame {
+    private final Size gameSize = new Size(800, 600);
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -16,12 +18,12 @@ public class SpaceInvaders extends YaegerGame {
     @Override
     public void setupGame() {
         setGameTitle("Space invaders");
-        setSize(new Size(800, 600));
+        setSize(gameSize);
     }
 
     @Override
     public void setupScenes() {
-        GameScene gameScene = new GameScene();
+        GameScene gameScene = new GameScene(gameSize);
         addScene(0, gameScene);
     }
 }

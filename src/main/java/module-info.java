@@ -3,5 +3,5 @@ module SpaceInvaders {
 
     exports org.spaceinvaders;
 
-    //opens sprites;
+    opens ships;
 }
