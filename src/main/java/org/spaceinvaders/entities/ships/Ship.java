@@ -3,11 +3,12 @@ package org.spaceinvaders.entities.ships;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
+import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import org.spaceinvaders.entities.projectiles.Bullet;
 import org.spaceinvaders.scenes.GameScene;
 
-public abstract class Ship extends DynamicSpriteEntity implements TimerContainer {
+public abstract class Ship extends DynamicSpriteEntity{
     private final GameScene scene;
     private boolean canShoot = true;
 
@@ -17,22 +18,13 @@ public abstract class Ship extends DynamicSpriteEntity implements TimerContainer
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
 
-    @Override
-    public void setupTimers() {
-        addTimer(new CooldownTimer(500, this));
-        getTimers().getFirst().pause();
-        getTimers().getFirst().reset();
-    }
-
     public void setCanShoot(boolean canShoot){
         this.canShoot = canShoot;
     }
 
-    public void shoot(Ship ship){
+    public void shoot(Ship ship, Direction direction){
         if (canShoot) {
-            setCanShoot(false);
-            getTimers().getFirst().resume();
-            Bullet bullet = new Bullet(new Coordinate2D(ship.getLocationInScene().getX(), ship.getLocationInScene().getY() - 70));
+            Bullet bullet = new Bullet(new Coordinate2D(ship.getLocationInScene().getX(), ship.getLocationInScene().getY() + 30), direction);
             scene.createProjectile(bullet);
         }
     }

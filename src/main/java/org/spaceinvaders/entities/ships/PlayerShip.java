@@ -2,6 +2,7 @@ package org.spaceinvaders.entities.ships;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.scenes.SceneBorder;
@@ -11,7 +12,7 @@ import org.spaceinvaders.scenes.GameScene;
 
 import java.util.Set;
 
-public class PlayerShip extends Ship implements KeyListener, SceneBorderTouchingWatcher {
+public class PlayerShip extends Ship implements KeyListener, SceneBorderTouchingWatcher, TimerContainer {
     private final int upperLimit;
 
     public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize, GameScene scene) {
@@ -23,7 +24,7 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if(pressedKeys.contains(KeyCode.SPACE)) {
-            shoot(this);
+            shoot(this, Direction.UP);
         }
         if (pressedKeys.contains(KeyCode.W)) {
             if (getLocationInScene().getY() > upperLimit) {
@@ -75,5 +76,19 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
             default:
                 break;
         }
+    }
+
+    @Override
+    public void setupTimers() {
+        addTimer(new CooldownTimer(500, this));
+        getTimers().getFirst().pause();
+        getTimers().getFirst().reset();
+    }
+
+    @Override
+    public void shoot(Ship ship, Direction direction){
+        super.shoot(ship, direction);
+        setCanShoot(false);
+        getTimers().getFirst().resume();
     }
 }

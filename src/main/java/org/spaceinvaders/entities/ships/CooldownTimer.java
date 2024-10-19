@@ -12,6 +12,7 @@ public class CooldownTimer extends Timer {
 
     @Override
     public void onAnimationUpdate(long now) {
+        System.out.println("test");
         ship.setCanShoot(true);
         this.pause();
     }
