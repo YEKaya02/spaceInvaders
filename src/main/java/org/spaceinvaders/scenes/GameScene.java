@@ -4,8 +4,8 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
-import org.spaceinvaders.SpaceInvaders;
-import org.spaceinvaders.entities.PlayerShip;
+import org.spaceinvaders.entities.ships.PlayerShip;
+import org.spaceinvaders.entities.projectiles.Bullet;
 
 public class GameScene extends DynamicScene {
     private final Coordinate2D playerShipPosition;
@@ -26,10 +26,14 @@ public class GameScene extends DynamicScene {
     @Override
     public void setupEntities() {
         YaegerEntity[] yeagerEntities = new YaegerEntity[1];
-        yeagerEntities[0] = new PlayerShip("ships/playerShip.png", playerShipPosition, gameSize);
+        yeagerEntities[0] = new PlayerShip("ships/playerShip.png", playerShipPosition, gameSize, this);
 
         for (YaegerEntity entity : yeagerEntities) {
             addEntity(entity);
         }
+    }
+
+    public void createProjectile(Bullet bullet){
+        addEntity(bullet);
     }
 }
