@@ -2,14 +2,15 @@ package org.spaceinvaders;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
+import com.github.hanyaeger.api.entities.impl.CustomFont;
+import com.github.hanyaeger.api.scenes.YaegerScene;
 import org.spaceinvaders.scenes.GameScene;
+import org.spaceinvaders.scenes.MainMenu;
 
-/**
- * Hello world!
- *
- */
 public class SpaceInvaders extends YaegerGame {
     private final Size gameSize = new Size(800, 600);
+    private final CustomFont titleFont = new CustomFont("fonts/TechnoRaceItalic.otf", 36);
+
 
     public static void main(String[] args) {
         launch(args);
@@ -23,7 +24,12 @@ public class SpaceInvaders extends YaegerGame {
 
     @Override
     public void setupScenes() {
-        GameScene gameScene = new GameScene(gameSize);
-        addScene(0, gameScene);
+        YaegerScene[] scenes = new YaegerScene[2];
+        scenes[0] = new MainMenu(titleFont, gameSize);
+        scenes[1] = new GameScene(gameSize);
+
+        for (int i = 0; i < scenes.length; i++) {
+            addScene(i, scenes[i]);
+        }
     }
 }

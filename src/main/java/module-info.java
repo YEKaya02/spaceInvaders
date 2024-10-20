@@ -6,4 +6,5 @@ module SpaceInvaders {
 
     opens ships;
     opens projectiles;
+    opens fonts;
 }
