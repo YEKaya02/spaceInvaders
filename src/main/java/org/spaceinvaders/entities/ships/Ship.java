@@ -4,11 +4,12 @@ import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.Direction;
+import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import org.spaceinvaders.entities.projectiles.Bullet;
 import org.spaceinvaders.scenes.GameScene;
 
-public abstract class Ship extends DynamicSpriteEntity{
+public abstract class Ship extends DynamicSpriteEntity implements SceneBorderTouchingWatcher {
     private final GameScene scene;
     private boolean canShoot = true;
 

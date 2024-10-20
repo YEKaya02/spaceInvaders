@@ -9,10 +9,11 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.spaceinvaders.scenes.GameScene;
+import org.spaceinvaders.timers.CooldownTimer;
 
 import java.util.Set;
 
-public class PlayerShip extends Ship implements KeyListener, SceneBorderTouchingWatcher, TimerContainer {
+public class PlayerShip extends Ship implements KeyListener, TimerContainer {
     private final int upperLimit;
 
     public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize, GameScene scene) {
@@ -59,8 +60,6 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
 
     @Override
     public void notifyBoundaryTouching(SceneBorder sceneBorder) {
-        setSpeed(0);
-        int centerOffsetWidth = (int) getWidth() / 2;
         int centerOffsetHeight = (int) getHeight() / 2;
 
         switch(sceneBorder){
@@ -68,10 +67,10 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
                 setAnchorLocationY(getSceneHeight() - getHeight() + centerOffsetHeight);
                 break;
             case LEFT:
-                setAnchorLocationX(1 + centerOffsetWidth);
+                setAnchorLocationX(getSceneWidth()-30);
                 break;
             case RIGHT:
-                setAnchorLocationX(getSceneWidth() - getWidth() - 1 + centerOffsetWidth);
+                setAnchorLocationX(30);
                 break;
             default:
                 break;

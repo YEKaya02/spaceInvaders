@@ -13,7 +13,7 @@ import java.util.List;
 public class Bullet extends DynamicSpriteEntity implements Collider, SceneBorderTouchingWatcher {
     public Bullet(Coordinate2D initialLocation, Direction direction) {
         super("projectiles/bullet.png", initialLocation);
-        setMotion(4, direction);
+        setMotion(6, direction);
     }
 
     @Override

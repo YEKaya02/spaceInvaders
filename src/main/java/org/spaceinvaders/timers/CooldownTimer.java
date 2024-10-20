@@ -1,18 +1,18 @@
-package org.spaceinvaders.entities.ships;
+package org.spaceinvaders.timers;
 
 import com.github.hanyaeger.api.Timer;
+import org.spaceinvaders.entities.ships.Ship;
 
 public class CooldownTimer extends Timer {
     private final Ship ship;
 
-    protected CooldownTimer(long intervalInMs, Ship ship) {
+    public CooldownTimer(long intervalInMs, Ship ship) {
         super(intervalInMs);
         this.ship = ship;
     }
 
     @Override
     public void onAnimationUpdate(long now) {
-        System.out.println("test");
         ship.setCanShoot(true);
         this.pause();
     }
