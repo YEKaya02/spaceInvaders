@@ -23,9 +23,9 @@ public abstract class Ship extends DynamicSpriteEntity implements SceneBorderTou
         this.canShoot = canShoot;
     }
 
-    public void shoot(Ship ship, Direction direction){
+    public void shoot(Coordinate2D coordinate2D, Direction direction){
         if (canShoot) {
-            Bullet bullet = new Bullet(new Coordinate2D(ship.getLocationInScene().getX(), ship.getLocationInScene().getY() + 30), direction);
+            Bullet bullet = new Bullet(coordinate2D, direction);
             scene.createProjectile(bullet);
         }
     }

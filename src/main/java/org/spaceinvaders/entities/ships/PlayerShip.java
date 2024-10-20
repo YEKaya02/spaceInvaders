@@ -25,7 +25,7 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer {
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if(pressedKeys.contains(KeyCode.SPACE)) {
-            shoot(this, Direction.UP);
+            shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 40), Direction.UP);
         }
         if (pressedKeys.contains(KeyCode.W)) {
             if (getLocationInScene().getY() > upperLimit) {
@@ -85,8 +85,8 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer {
     }
 
     @Override
-    public void shoot(Ship ship, Direction direction){
-        super.shoot(ship, direction);
+    public void shoot(Coordinate2D coordinate2D, Direction direction){
+        super.shoot(coordinate2D, direction);
         setCanShoot(false);
         getTimers().getFirst().resume();
     }

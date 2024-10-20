@@ -49,4 +49,8 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
                 break;
         }
     }
+
+    public Coordinate2D getLocation(){
+        return getLocationInScene();
+    }
 }

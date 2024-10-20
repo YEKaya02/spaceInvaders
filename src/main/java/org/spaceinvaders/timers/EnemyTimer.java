@@ -1,5 +1,6 @@
 package org.spaceinvaders.timers;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Timer;
 import com.github.hanyaeger.api.entities.Direction;
 import org.spaceinvaders.entities.ships.EnemyShip;
@@ -18,7 +19,7 @@ public class EnemyTimer extends Timer {
     @Override
     public void onAnimationUpdate(long l) {
         if (rand.nextInt(10) < 7) {
-            ship.shoot(ship, Direction.DOWN);
+            ship.shoot(new Coordinate2D(ship.getLocation().getX(), ship.getLocation().getY() + 30), Direction.DOWN);
         }
         ship.move();
     }
