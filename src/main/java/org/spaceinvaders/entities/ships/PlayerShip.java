@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.Direction;
+import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
@@ -11,13 +12,14 @@ import javafx.scene.input.KeyCode;
 import org.spaceinvaders.scenes.GameScene;
 import org.spaceinvaders.timers.CooldownTimer;
 
+import java.util.Objects;
 import java.util.Set;
 
-public class PlayerShip extends Ship implements KeyListener, TimerContainer {
+public class PlayerShip extends Ship implements KeyListener, TimerContainer, SceneBorderCrossingWatcher, SceneBorderTouchingWatcher {
     private final int upperLimit;
 
     public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize, GameScene scene) {
-        super(resource, initialLocation, scene, "projectiles/bullet.png");
+        super(resource, initialLocation, scene, "projectiles/bullet.png", 30);
         int movementHeight = 200;
         this.upperLimit = (int) (gameSize.height() - movementHeight);
     }
@@ -60,20 +62,9 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer {
 
     @Override
     public void notifyBoundaryTouching(SceneBorder sceneBorder) {
-        int centerOffsetHeight = (int) getHeight() / 2;
 
-        switch(sceneBorder){
-            case BOTTOM:
-                setAnchorLocationY(getSceneHeight() - getHeight() + centerOffsetHeight);
-                break;
-            case LEFT:
-                setAnchorLocationX(getSceneWidth()-30);
-                break;
-            case RIGHT:
-                setAnchorLocationX(30);
-                break;
-            default:
-                break;
+        if (sceneBorder == SceneBorder.BOTTOM) {
+            setAnchorLocationY(getSceneHeight() - 5);
         }
     }
 
@@ -89,5 +80,19 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer {
         super.shoot(coordinate2D, direction);
         setCanShoot(false);
         getTimers().getFirst().resume();
+    }
+
+    @Override
+    public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
+        switch(sceneBorder){
+            case LEFT:
+                setAnchorLocationX(getSceneWidth());
+                break;
+            case RIGHT:
+                setAnchorLocationX(0);
+                break;
+            default:
+                break;
+        }
     }
 }
