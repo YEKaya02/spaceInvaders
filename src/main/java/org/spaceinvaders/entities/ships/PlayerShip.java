@@ -2,20 +2,22 @@ package org.spaceinvaders.entities.ships;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.spaceinvaders.scenes.GameScene;
+import org.spaceinvaders.timers.CooldownTimer;
 
 import java.util.Set;
 
-public class PlayerShip extends Ship implements KeyListener, SceneBorderTouchingWatcher {
+public class PlayerShip extends Ship implements KeyListener, TimerContainer {
     private final int upperLimit;
 
     public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize, GameScene scene) {
-        super(resource, initialLocation, scene);
+        super(resource, initialLocation, scene, "projectiles/bullet.png");
         int movementHeight = 200;
         this.upperLimit = (int) (gameSize.height() - movementHeight);
     }
@@ -23,7 +25,7 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if(pressedKeys.contains(KeyCode.SPACE)) {
-            shoot(this);
+            shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 40), Direction.UP);
         }
         if (pressedKeys.contains(KeyCode.W)) {
             if (getLocationInScene().getY() > upperLimit) {
@@ -58,8 +60,6 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
 
     @Override
     public void notifyBoundaryTouching(SceneBorder sceneBorder) {
-        setSpeed(0);
-        int centerOffsetWidth = (int) getWidth() / 2;
         int centerOffsetHeight = (int) getHeight() / 2;
 
         switch(sceneBorder){
@@ -67,13 +67,27 @@ public class PlayerShip extends Ship implements KeyListener, SceneBorderTouching
                 setAnchorLocationY(getSceneHeight() - getHeight() + centerOffsetHeight);
                 break;
             case LEFT:
-                setAnchorLocationX(1 + centerOffsetWidth);
+                setAnchorLocationX(getSceneWidth()-30);
                 break;
             case RIGHT:
-                setAnchorLocationX(getSceneWidth() - getWidth() - 1 + centerOffsetWidth);
+                setAnchorLocationX(30);
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void setupTimers() {
+        addTimer(new CooldownTimer(500, this));
+        getTimers().getFirst().pause();
+        getTimers().getFirst().reset();
+    }
+
+    @Override
+    public void shoot(Coordinate2D coordinate2D, Direction direction){
+        super.shoot(coordinate2D, direction);
+        setCanShoot(false);
+        getTimers().getFirst().resume();
     }
 }
