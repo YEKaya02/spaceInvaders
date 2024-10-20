@@ -9,7 +9,6 @@ import org.spaceinvaders.scenes.MainMenu;
 
 public class SpaceInvaders extends YaegerGame {
     private final Size gameSize = new Size(800, 600);
-    private final CustomFont titleFont = new CustomFont("fonts/TechnoRaceItalic.otf", 36);
 
 
     public static void main(String[] args) {
@@ -25,7 +24,7 @@ public class SpaceInvaders extends YaegerGame {
     @Override
     public void setupScenes() {
         YaegerScene[] scenes = new YaegerScene[2];
-        scenes[0] = new MainMenu(titleFont, gameSize);
+        scenes[0] = new MainMenu(gameSize, this);
         scenes[1] = new GameScene(gameSize);
 
         for (int i = 0; i < scenes.length; i++) {

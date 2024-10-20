@@ -7,15 +7,19 @@ import com.github.hanyaeger.api.entities.impl.CustomFont;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import javafx.scene.paint.Color;
+import org.spaceinvaders.SpaceInvaders;
 import org.spaceinvaders.UIEntities.Button;
+import org.spaceinvaders.UIEntities.MainMenuButton;
 
 public class MainMenu extends StaticScene {
-    CustomFont font;
+    private final CustomFont font = new CustomFont("fonts/TechnoRaceItalic.otf", 36);
     Size gameSize;
+    SpaceInvaders spaceInvaders;
 
-    public MainMenu(CustomFont font, Size gameSize){
-        this.font = font;
+
+    public MainMenu(Size gameSize, SpaceInvaders spaceInvaders){
         this.gameSize = gameSize;
+        this.spaceInvaders = spaceInvaders;
     }
 
     @Override
@@ -35,7 +39,11 @@ public class MainMenu extends StaticScene {
     public void setupEntities() {
         addEntity(returnTitle());
 
-        Button startButton = new Button(new Coordinate2D(gameSize.width()/2, gameSize.height()/2), "Play");
+        Button startButton = new MainMenuButton(new Coordinate2D(gameSize.width()/2, gameSize.height()/2), "Play", this);
         addEntity(startButton);
+    }
+
+    public void handleButtonPress() {
+        spaceInvaders.setActiveScene(1);
     }
 }
