@@ -12,11 +12,13 @@ import org.spaceinvaders.scenes.GameScene;
 public abstract class Ship extends DynamicSpriteEntity implements SceneBorderTouchingWatcher {
     private final GameScene scene;
     private boolean canShoot = true;
+    private String bulletResource;
 
-    protected Ship(String resource, Coordinate2D initialLocation, GameScene scene) {
+    protected Ship(String resource, Coordinate2D initialLocation, GameScene scene, String bulletResource) {
         super(resource, initialLocation);
         this.scene = scene;
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        this.bulletResource = bulletResource;
     }
 
     public void setCanShoot(boolean canShoot){
@@ -25,7 +27,7 @@ public abstract class Ship extends DynamicSpriteEntity implements SceneBorderTou
 
     public void shoot(Coordinate2D coordinate2D, Direction direction){
         if (canShoot) {
-            Bullet bullet = new Bullet(coordinate2D, direction);
+            Bullet bullet = new Bullet(coordinate2D, direction, bulletResource);
             scene.createProjectile(bullet);
         }
     }

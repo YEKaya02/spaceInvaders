@@ -16,7 +16,7 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
     public Direction movingDirection = Direction.LEFT;
 
     public EnemyShip(String resource, Coordinate2D initialLocation, GameScene scene) {
-        super(resource, initialLocation, scene);
+        super(resource, initialLocation, scene, "projectiles/enemyBullet.png");
     }
 
     @Override

@@ -17,7 +17,7 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer {
     private final int upperLimit;
 
     public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize, GameScene scene) {
-        super(resource, initialLocation, scene);
+        super(resource, initialLocation, scene, "projectiles/bullet.png");
         int movementHeight = 200;
         this.upperLimit = (int) (gameSize.height() - movementHeight);
     }

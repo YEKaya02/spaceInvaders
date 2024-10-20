@@ -11,8 +11,8 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import java.util.List;
 
 public class Bullet extends DynamicSpriteEntity implements Collider, SceneBorderTouchingWatcher {
-    public Bullet(Coordinate2D initialLocation, Direction direction) {
-        super("projectiles/bullet.png", initialLocation);
+    public Bullet(Coordinate2D initialLocation, Direction direction, String resource) {
+        super(resource, initialLocation);
         setMotion(6, direction);
     }
 
