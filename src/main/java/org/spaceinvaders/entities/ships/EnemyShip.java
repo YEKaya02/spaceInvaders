@@ -1,6 +1,5 @@
 package org.spaceinvaders.entities.ships;
 
-import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.*;
@@ -16,21 +15,6 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
 
     public EnemyShip(String resource, Coordinate2D initialLocation, GameScene scene) {
         super(resource, initialLocation, scene, "projectiles/enemyBullet.png", -30);
-    }
-
-    @Override
-    public void onCollision(List<Collider> colliders) {
-        for (Collider collider : colliders) {
-            if (collider instanceof Bullet){
-                ((Bullet) collider).remove();
-                int newWidth = ((int) calculateHealthWidth(25.0));
-                if (newWidth < 0){
-                    this.remove();
-                }
-                healthBar.setWidth(newWidth);
-                healthBar.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-            }
-        }
     }
 
     @Override
@@ -56,5 +40,10 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
                 setAnchorLocationX(0);
                 break;
         }
+    }
+
+    @Override
+    protected void handleDeath() {
+        remove();
     }
 }

@@ -82,6 +82,15 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
         getTimers().getFirst().resume();
     }
 
+    private void gameOver(){
+        System.out.println("game over");
+    }
+
+    @Override
+    protected void handleDeath() {
+        gameOver();
+    }
+
     @Override
     public void notifyBoundaryCrossing(SceneBorder sceneBorder) {
         switch(sceneBorder){

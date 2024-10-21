@@ -1,13 +1,17 @@
 package org.spaceinvaders.entities.ships;
 
 import com.github.hanyaeger.api.*;
+import com.github.hanyaeger.api.entities.Collided;
+import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.DynamicCompositeEntity;
 import org.spaceinvaders.UIEntities.HealthBar;
 import org.spaceinvaders.entities.projectiles.Bullet;
 import org.spaceinvaders.scenes.GameScene;
 
-public abstract class Ship extends DynamicCompositeEntity {
+import java.util.List;
+
+public abstract class Ship extends DynamicCompositeEntity implements Collided, Collider {
     private final ShipSprite shipSprite;
     protected HealthBar healthBar;
     protected Coordinate2D healthBarPosition;
@@ -44,12 +48,29 @@ public abstract class Ship extends DynamicCompositeEntity {
         }
     }
 
+    @Override
+    public void onCollision(List<Collider> colliders) {
+        for (Collider collider : colliders) {
+            if (collider instanceof Bullet){
+                ((Bullet) collider).remove();
+                handleDamage(25.0);
+            }
+        }
+    }
+
+    protected void handleDamage(double damage){
+        int newWidth = ((int) calculateHealthWidth(damage));
+        if (newWidth < 1){
+            handleDeath();
+        }
+        healthBar.setWidth(newWidth);
+        healthBar.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+    }
+
+    protected abstract void handleDeath();
+
     public double calculateHealthWidth(double damagePercentage){
         double damage = (healthBarWidthTotal / 100.0) * damagePercentage;
         return healthBar.getWidth() - damage;
-    }
-
-    public Coordinate2D getHealthBarPosition() {
-        return healthBarPosition;
     }
 }
