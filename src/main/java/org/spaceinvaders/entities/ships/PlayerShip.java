@@ -27,7 +27,7 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         if(pressedKeys.contains(KeyCode.SPACE)) {
-            shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 40), Direction.UP);
+            shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 55), Direction.UP);
         }
         if (pressedKeys.contains(KeyCode.W)) {
             if (getLocationInScene().getY() > upperLimit) {
