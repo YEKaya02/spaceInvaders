@@ -1,6 +1,7 @@
 module SpaceInvaders {
     requires hanyaeger;
     requires java.desktop;
+    requires com.google.guice;
 
     exports org.spaceinvaders;
 
