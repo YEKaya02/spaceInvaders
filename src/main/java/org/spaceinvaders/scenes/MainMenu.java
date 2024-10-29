@@ -8,8 +8,8 @@ import com.github.hanyaeger.api.entities.impl.TextEntity;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import javafx.scene.paint.Color;
 import org.spaceinvaders.SpaceInvaders;
-import org.spaceinvaders.UIEntities.Button;
-import org.spaceinvaders.UIEntities.MainMenuButton;
+import org.spaceinvaders.UIEntities.button.Button;
+import org.spaceinvaders.UIEntities.button.MainMenuButton;
 
 public class MainMenu extends StaticScene {
     private final CustomFont font = new CustomFont("fonts/TechnoRaceItalic.otf", 36);

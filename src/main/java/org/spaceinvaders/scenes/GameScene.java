@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.spaceinvaders.LevelManager;
+import org.spaceinvaders.UIEntities.gameover.GameOverScreen;
 import org.spaceinvaders.entities.ships.EnemyShip;
 import org.spaceinvaders.entities.ships.PlayerShip;
 import org.spaceinvaders.entities.projectiles.Bullet;
@@ -55,5 +56,9 @@ public class GameScene extends DynamicScene {
 
     public void createProjectile(Bullet bullet){
         addEntity(bullet);
+    }
+
+    public void gameOver(){
+        addEntity(new GameOverScreen(new Coordinate2D(), gameSize));
     }
 }

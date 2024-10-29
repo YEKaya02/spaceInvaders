@@ -1,4 +1,4 @@
-package org.spaceinvaders.UIEntities;
+package org.spaceinvaders.UIEntities.button;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
