@@ -28,7 +28,7 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
 
     @Override
     public void setupTimers() {
-        addTimer(new EnemyTimer(500, this));
+        addTimer(new EnemyTimer(500, this, gameScene));
     }
 
     public void move(){
@@ -54,6 +54,6 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
     @Override
     protected void handleDeath() {
         remove();
-        scene.handleEnemyShipDeath();
+        gameScene.handleEnemyShipDeath();
     }
 }

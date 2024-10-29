@@ -86,7 +86,8 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
 
     @Override
     protected void handleDeath() {
-        scene.gameOver();
+        remove();
+        gameScene.gameOver();
     }
 
     @Override

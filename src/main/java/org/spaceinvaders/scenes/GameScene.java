@@ -16,6 +16,7 @@ public class GameScene extends DynamicScene {
     private final Coordinate2D playerShipPosition;
     private final Size gameSize;
     private final LevelManager levelManager;
+    public boolean gameOver = false;
 
 
     public GameScene(Size gameSize) {
@@ -59,6 +60,7 @@ public class GameScene extends DynamicScene {
     }
 
     public void gameOver(){
+        gameOver = true;
         addEntity(new GameOverScreen(new Coordinate2D(), gameSize));
     }
 }
