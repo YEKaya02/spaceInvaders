@@ -106,4 +106,8 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
                 break;
         }
     }
+
+    public void resetHealth() {
+        healthBar.setWidth(healthBarWidthTotal);
+    }
 }

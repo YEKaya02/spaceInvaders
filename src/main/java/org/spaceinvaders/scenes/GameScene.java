@@ -30,16 +30,23 @@ public class GameScene extends DynamicScene {
 
     @Override
     public void setupEntities() {
+        // todo: define ship sprite in respective ship class
+        PlayerShip playerShip = new PlayerShip("ships/playerShip.png", playerShipPosition, gameSize, this);
+        levelManager.setPlayerShip(playerShip);
         levelManager.nextLevel();
 
         ArrayList<YaegerEntity> entities = new ArrayList<>();
         entities.add(levelManager.getLevelIndicator());
-        // todo: define ship sprite in respective ship class
-        entities.add(new PlayerShip("ships/playerShip.png", playerShipPosition, gameSize, this));
+        entities.add(playerShip);
 
         for (YaegerEntity entity : entities) {
             addEntity(entity);
         }
+    }
+
+    public void handleEnemyShipDeath(){
+        levelManager.removeShipFromTotal();
+        levelManager.nextLevel();
     }
 
     public void createEnemyShip(Coordinate2D coordinate2D){

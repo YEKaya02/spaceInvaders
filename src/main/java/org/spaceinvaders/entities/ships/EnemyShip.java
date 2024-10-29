@@ -42,5 +42,6 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
     @Override
     protected void handleDeath() {
         remove();
+        scene.handleEnemyShipDeath();
     }
 }

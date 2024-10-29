@@ -64,7 +64,6 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
             handleDeath();
         }
         healthBar.setWidth(newWidth);
-        healthBar.setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
 
     protected abstract void handleDeath();
