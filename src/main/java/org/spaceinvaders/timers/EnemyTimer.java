@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class EnemyTimer extends Timer {
     EnemyShip ship;
-    Random rand = new Random();
+    Random random = new Random();
 
     public EnemyTimer(long intervalInMs, EnemyShip ship) {
         super(intervalInMs);
@@ -18,7 +18,7 @@ public class EnemyTimer extends Timer {
 
     @Override
     public void onAnimationUpdate(long l) {
-        if (rand.nextInt(10) < 7) {
+        if (random.nextInt(10) < 6) {
             ship.shoot(new Coordinate2D(ship.getLocation().getX(), ship.getLocation().getY() + 30), Direction.DOWN);
         }
         ship.move();

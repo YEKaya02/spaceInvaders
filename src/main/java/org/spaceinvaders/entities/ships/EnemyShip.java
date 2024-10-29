@@ -7,11 +7,23 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import org.spaceinvaders.scenes.GameScene;
 import org.spaceinvaders.timers.EnemyTimer;
 
+import java.util.Random;
+
 public class EnemyShip extends Ship implements Collided, Collider, TimerContainer, SceneBorderCrossingWatcher {
-    public Direction movingDirection = Direction.RIGHT;
+    private final Direction movingDirection;
+    private final double speed;
 
     public EnemyShip(String resource, Coordinate2D initialLocation, GameScene scene) {
         super(resource, initialLocation, scene, "projectiles/enemyBullet.png", -30);
+        Random random = new Random();
+
+        if (random.nextBoolean()) {
+            movingDirection = Direction.RIGHT;
+        } else {
+            movingDirection = Direction.LEFT;
+        }
+
+        speed = random.nextDouble(1.5, 2.3) ;
     }
 
     @Override
@@ -20,7 +32,7 @@ public class EnemyShip extends Ship implements Collided, Collider, TimerContaine
     }
 
     public void move(){
-        setMotion(2, movingDirection);
+        setMotion(speed, movingDirection);
     }
 
     public Coordinate2D getLocation(){
