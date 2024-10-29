@@ -12,7 +12,6 @@ import javafx.scene.input.KeyCode;
 import org.spaceinvaders.scenes.GameScene;
 import org.spaceinvaders.timers.CooldownTimer;
 
-import java.util.Objects;
 import java.util.Set;
 
 public class PlayerShip extends Ship implements KeyListener, TimerContainer, SceneBorderCrossingWatcher, SceneBorderTouchingWatcher {
@@ -26,6 +25,9 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
+        // defined key presses:
+        // space: shoot
+        // WASD: move into direction of keypress, diagonal movement is also possible
         if(pressedKeys.contains(KeyCode.SPACE)) {
             shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 55), Direction.UP);
         }

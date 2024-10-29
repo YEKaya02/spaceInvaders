@@ -4,11 +4,8 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.scenes.SceneBorder;
-import org.spaceinvaders.entities.projectiles.Bullet;
 import org.spaceinvaders.scenes.GameScene;
 import org.spaceinvaders.timers.EnemyTimer;
-
-import java.util.List;
 
 public class EnemyShip extends Ship implements Collided, Collider, TimerContainer, SceneBorderCrossingWatcher {
     public Direction movingDirection = Direction.RIGHT;
