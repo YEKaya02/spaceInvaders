@@ -9,6 +9,9 @@ import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
+import org.spaceinvaders.entities.projectiles.Bullet;
+import org.spaceinvaders.entities.projectiles.Missile;
+import org.spaceinvaders.entities.projectiles.Projectile;
 import org.spaceinvaders.scenes.GameScene;
 import org.spaceinvaders.timers.CooldownTimer;
 
@@ -16,11 +19,17 @@ import java.util.Set;
 
 public class PlayerShip extends Ship implements KeyListener, TimerContainer, SceneBorderCrossingWatcher, SceneBorderTouchingWatcher {
     private final int upperLimit;
+    private SelectedProjectile selectedProjectile = SelectedProjectile.Bullet;
 
     public PlayerShip(String resource, Coordinate2D initialLocation, Size gameSize, GameScene scene) {
-        super(resource, initialLocation, scene, "projectiles/bullet.png", 30);
+        super(resource, initialLocation, scene, 30);
         int movementHeight = 200;
         this.upperLimit = (int) (gameSize.height() - movementHeight);
+    }
+
+    private enum SelectedProjectile {
+        Bullet,
+        Missile;
     }
 
     @Override
@@ -28,8 +37,23 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
         // defined key presses:
         // space: shoot
         // WASD: move into direction of keypress, diagonal movement is also possible
-        if(pressedKeys.contains(KeyCode.SPACE)) {
-            shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 55), Direction.UP);
+        // x: select missiles
+        // c: deselect missiles
+
+        if (gameScene.getMissileIndicatorOpacity() != 0.0) {
+            if (pressedKeys.contains(KeyCode.X)) {
+                gameScene.setMissileIndicatorOpacity(1);
+                getTimers().getFirst().setIntervalInMs(1000);
+                selectedProjectile = SelectedProjectile.Missile;
+            } else if (pressedKeys.contains(KeyCode.C)) {
+                gameScene.setMissileIndicatorOpacity(0.5);
+                getTimers().getFirst().setIntervalInMs(500);
+                selectedProjectile = SelectedProjectile.Bullet;
+            }
+        }
+
+        if (pressedKeys.contains(KeyCode.SPACE)) {
+            shoot(new Coordinate2D(getLocationInScene().getX(), getLocationInScene().getY() - 70), Direction.UP);
         }
         if (pressedKeys.contains(KeyCode.W)) {
             if (getLocationInScene().getY() > upperLimit) {
@@ -64,7 +88,6 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
 
     @Override
     public void notifyBoundaryTouching(SceneBorder sceneBorder) {
-
         if (sceneBorder == SceneBorder.BOTTOM) {
             setAnchorLocationY(getSceneHeight() - 5);
         }
@@ -77,9 +100,17 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
         getTimers().getFirst().reset();
     }
 
-    @Override
     public void shoot(Coordinate2D coordinate2D, Direction direction){
-        super.shoot(coordinate2D, direction);
+        Projectile projectile = null;
+        
+        if (selectedProjectile == SelectedProjectile.Bullet) {
+            projectile = new Bullet(coordinate2D, direction, Bullet.BulletType.PlayerBullet);
+            
+        } else if (selectedProjectile == SelectedProjectile.Missile){
+            projectile = new Missile(coordinate2D, direction);
+        }
+
+        super.shoot(projectile);
         setCanShoot(false);
         getTimers().getFirst().resume();
     }

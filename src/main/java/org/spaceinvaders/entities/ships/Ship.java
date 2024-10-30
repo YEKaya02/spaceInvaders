@@ -19,16 +19,14 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
     protected int healthBarWidthTotal = 32;
     protected final GameScene gameScene;
     private boolean canShoot = true;
-    private final String bulletResource;
 
-    protected Ship(String resource, Coordinate2D initialLocation, GameScene scene, String bulletResource, int healthBarOffset) {
+    protected Ship(String resource, Coordinate2D initialLocation, GameScene scene, int healthBarOffset) {
         super(initialLocation);
         this.shipSprite = new ShipSprite(resource, new Coordinate2D());
         this.healthBarPosition = new Coordinate2D(0,shipSprite.getHeight()+healthBarOffset);
         Size healthBarSize = new Size(healthBarWidthTotal, 5);
         this.healthBar = new HealthBar(this.healthBarPosition, healthBarSize);
         this.gameScene = scene;
-        this.bulletResource = bulletResource;
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
 
@@ -42,10 +40,9 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
         addEntity(healthBar);
     }
 
-    public void shoot(Coordinate2D coordinate2D, Direction direction){
+    public void shoot(Projectile projectile){
         if (canShoot) {
-            Projectile bullet = new Bullet(coordinate2D, direction, bulletResource);
-            gameScene.createProjectile(bullet);
+            gameScene.createProjectile(projectile);
         }
     }
 

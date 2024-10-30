@@ -7,6 +7,7 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.spaceinvaders.LevelManager;
 import org.spaceinvaders.SpaceInvaders;
 import org.spaceinvaders.UIEntities.gameover.GameOverScreen;
+import org.spaceinvaders.UIEntities.gamescene.MissileIndicator;
 import org.spaceinvaders.entities.ships.EnemyShip;
 import org.spaceinvaders.entities.ships.PlayerShip;
 import org.spaceinvaders.entities.projectiles.Projectile;
@@ -18,6 +19,7 @@ public class GameScene extends DynamicScene {
     private final Size gameSize;
     private final LevelManager levelManager;
     private final SpaceInvaders spaceInvaders;
+    private final MissileIndicator missileIndicator;
     public boolean gameOver = false;
 
 
@@ -26,6 +28,7 @@ public class GameScene extends DynamicScene {
         this.gameSize = gameSize;
         this.levelManager = new LevelManager(gameSize, this);
         this.spaceInvaders = spaceInvaders;
+        this.missileIndicator = new MissileIndicator(new Coordinate2D(gameSize.width() - 40, gameSize.height() - 40));
     }
 
     @Override
@@ -43,10 +46,19 @@ public class GameScene extends DynamicScene {
         ArrayList<YaegerEntity> entities = new ArrayList<>();
         entities.add(levelManager.getLevelIndicator());
         entities.add(playerShip);
+        entities.add(missileIndicator);
 
         for (YaegerEntity entity : entities) {
             addEntity(entity);
         }
+    }
+
+    public void setMissileIndicatorOpacity(double opacity) {
+        missileIndicator.setOpacity(opacity);
+    }
+
+    public double getMissileIndicatorOpacity() {
+        return missileIndicator.getOpacity();
     }
 
     public void handleEnemyShipDeath(){
