@@ -38,8 +38,7 @@ public class GameScene extends DynamicScene {
 
     @Override
     public void setupEntities() {
-        // todo: define ship sprite in respective ship class
-        PlayerShip playerShip = new PlayerShip("ships/playerShip.png", playerShipPosition, gameSize, this);
+        PlayerShip playerShip = new PlayerShip(playerShipPosition, gameSize, this);
         levelManager.setPlayerShip(playerShip);
         levelManager.nextLevel();
 
@@ -67,7 +66,7 @@ public class GameScene extends DynamicScene {
     }
 
     public void createEnemyShip(Coordinate2D coordinate2D){
-        addEntity(new EnemyShip("ships/enemyShip.png", coordinate2D, this));
+        addEntity(new EnemyShip(coordinate2D, this));
     }
 
     public void createProjectile(Projectile bullet){

@@ -10,12 +10,12 @@ import org.spaceinvaders.scenes.GameScene;
 
 import java.util.Random;
 
-public class EnemyTimer extends Timer {
+public class EnemyLogicTimer extends Timer {
     EnemyShip ship;
     Random random = new Random();
     GameScene gameScene;
 
-    public EnemyTimer(long intervalInMs, EnemyShip ship, GameScene gameScene) {
+    public EnemyLogicTimer(long intervalInMs, EnemyShip ship, GameScene gameScene) {
         super(intervalInMs);
         this.ship = ship;
         this.gameScene = gameScene;

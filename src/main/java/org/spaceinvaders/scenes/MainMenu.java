@@ -27,7 +27,7 @@ public class MainMenu extends StaticScene {
         setBackgroundImage("background.gif");
     }
 
-    private TextEntity returnTitle(){
+    private TextEntity returnTitleText(){
         TextEntity title = new TextEntity(new Coordinate2D(gameSize.width()/2, 100), "Space Invaders");
         title.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         title.setFont(font);
@@ -37,7 +37,7 @@ public class MainMenu extends StaticScene {
 
     @Override
     public void setupEntities() {
-        addEntity(returnTitle());
+        addEntity(returnTitleText());
 
         Button startButton = new MainMenuButton(new Coordinate2D(gameSize.width()/2, gameSize.height()/2), "Play", this);
         addEntity(startButton);

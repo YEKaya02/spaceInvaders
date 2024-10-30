@@ -3,10 +3,8 @@ package org.spaceinvaders.entities.ships;
 import com.github.hanyaeger.api.*;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.DynamicCompositeEntity;
 import org.spaceinvaders.UIEntities.gamescene.HealthBar;
-import org.spaceinvaders.entities.projectiles.Bullet;
 import org.spaceinvaders.entities.projectiles.Projectile;
 import org.spaceinvaders.scenes.GameScene;
 
@@ -24,9 +22,10 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
         super(initialLocation);
         this.shipSprite = new ShipSprite(resource, new Coordinate2D());
         this.healthBarPosition = new Coordinate2D(0,shipSprite.getHeight()+healthBarOffset);
+        this.gameScene = scene;
         Size healthBarSize = new Size(healthBarWidthTotal, 5);
         this.healthBar = new HealthBar(this.healthBarPosition, healthBarSize);
-        this.gameScene = scene;
+
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
 
@@ -40,6 +39,7 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
         addEntity(healthBar);
     }
 
+    // projectile polymorphism
     public void shoot(Projectile projectile){
         if (canShoot) {
             gameScene.createProjectile(projectile);
@@ -59,9 +59,11 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
 
     protected void handleDamage(double damage){
         int newWidth = ((int) calculateHealthWidth(damage));
+
         if (newWidth < 1){
             handleDeath();
         }
+
         healthBar.setWidth(newWidth);
     }
 
