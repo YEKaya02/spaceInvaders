@@ -7,6 +7,7 @@ import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.DynamicCompositeEntity;
 import org.spaceinvaders.UIEntities.gamescene.HealthBar;
 import org.spaceinvaders.entities.projectiles.Bullet;
+import org.spaceinvaders.entities.projectiles.Projectile;
 import org.spaceinvaders.scenes.GameScene;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
 
     public void shoot(Coordinate2D coordinate2D, Direction direction){
         if (canShoot) {
-            Bullet bullet = new Bullet(coordinate2D, direction, bulletResource);
+            Projectile bullet = new Bullet(coordinate2D, direction, bulletResource);
             gameScene.createProjectile(bullet);
         }
     }
@@ -51,9 +52,9 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
     @Override
     public void onCollision(List<Collider> colliders) {
         for (Collider collider : colliders) {
-            if (collider instanceof Bullet){
-                ((Bullet) collider).remove();
-                handleDamage(25.0);
+            if (collider instanceof Projectile){
+                ((Projectile) collider).remove();
+                handleDamage(((Projectile) collider).getDamage());
             }
         }
     }

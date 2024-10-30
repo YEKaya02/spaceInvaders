@@ -9,7 +9,7 @@ import org.spaceinvaders.SpaceInvaders;
 import org.spaceinvaders.UIEntities.gameover.GameOverScreen;
 import org.spaceinvaders.entities.ships.EnemyShip;
 import org.spaceinvaders.entities.ships.PlayerShip;
-import org.spaceinvaders.entities.projectiles.Bullet;
+import org.spaceinvaders.entities.projectiles.Projectile;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,7 @@ public class GameScene extends DynamicScene {
         addEntity(new EnemyShip("ships/enemyShip.png", coordinate2D, this));
     }
 
-    public void createProjectile(Bullet bullet){
+    public void createProjectile(Projectile bullet){
         addEntity(bullet);
     }
 
