@@ -16,7 +16,6 @@ public class MainMenu extends StaticScene {
     Size gameSize;
     SpaceInvaders spaceInvaders;
 
-
     public MainMenu(Size gameSize, SpaceInvaders spaceInvaders){
         this.gameSize = gameSize;
         this.spaceInvaders = spaceInvaders;

@@ -65,7 +65,6 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
                     setMotion(3, Direction.UP);
                 }
             } else {
-                // Stop the motion.
                 setMotion(0, 0);
             }
         } else if (pressedKeys.contains(KeyCode.S)) {
@@ -81,7 +80,6 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
         } else if (pressedKeys.contains(KeyCode.D)) {
             setMotion(3, Direction.RIGHT);
         } else if (!pressedKeys.contains(KeyCode.W) && !pressedKeys.contains(KeyCode.A) && !pressedKeys.contains(KeyCode.S) && !pressedKeys.contains(KeyCode.D)) {
-            // Stop the motion.
             setMotion(0,0);
         }
     }

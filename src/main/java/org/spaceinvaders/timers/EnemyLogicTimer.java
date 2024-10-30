@@ -24,7 +24,8 @@ public class EnemyLogicTimer extends Timer {
     @Override
     public void onAnimationUpdate(long l) {
         if (random.nextInt(10) < 6) {
-            Projectile bullet = new Bullet(new Coordinate2D(ship.getLocation().getX(), ship.getLocation().getY() + 30),
+            Projectile bullet = new Bullet(
+                    new Coordinate2D(ship.getLocation().getX(), ship.getLocation().getY() + 30),
                     Direction.DOWN,
                     Bullet.BulletType.EnemyBullet);
 

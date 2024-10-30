@@ -36,9 +36,6 @@ public class LevelManager {
     }
 
     public void nextLevel(){
-        // This method is called at the start of each level even level 1.
-        // Because we call this method after any enemy ship dies we need to make sure
-        // there are none left in the level before we go to the next level.
         if (enemyShips != 0){
             return;
         }
@@ -50,7 +47,6 @@ public class LevelManager {
         levelIndicator.nextLevel();
 
         for (int i = 0; i < totalEnemyShips; i++){
-            // Here we make our new ships for the new level, its x coordinate is randomly chosen.
             gameScene.createEnemyShip(new Coordinate2D(random.nextInt(gameWidth),100));
         }
     }
