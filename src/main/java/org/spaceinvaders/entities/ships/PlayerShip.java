@@ -100,12 +100,12 @@ public class PlayerShip extends Ship implements KeyListener, TimerContainer, Sce
         getTimers().getFirst().reset();
     }
 
+    // projectile polymorphism
     public void shoot(Coordinate2D coordinate2D, Direction direction){
         Projectile projectile = null;
         
         if (selectedProjectile == SelectedProjectile.Bullet) {
             projectile = new Bullet(coordinate2D, direction, Bullet.BulletType.PlayerBullet);
-            
         } else if (selectedProjectile == SelectedProjectile.Missile){
             projectile = new Missile(coordinate2D, direction);
         }

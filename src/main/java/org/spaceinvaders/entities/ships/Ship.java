@@ -46,6 +46,7 @@ public abstract class Ship extends DynamicCompositeEntity implements Collided, C
         }
     }
 
+    // projectile polymorphism
     @Override
     public void onCollision(List<Collider> colliders) {
         for (Collider collider : colliders) {
