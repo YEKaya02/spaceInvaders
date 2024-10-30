@@ -5,7 +5,7 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.DynamicCompositeEntity;
-import org.spaceinvaders.UIEntities.HealthBar;
+import org.spaceinvaders.UIEntities.gamescene.HealthBar;
 import org.spaceinvaders.entities.projectiles.Bullet;
 import org.spaceinvaders.scenes.GameScene;
 

@@ -8,13 +8,16 @@ import javafx.scene.paint.Color;
 
 
 public class ButtonRectangle extends RectangleEntity {
-    private final Color primaryColor = Color.color(0.47, 0.47, 0.49);
-    private final Color secondaryColor = Color.color(0.20, 0.20, 0.23);
+    private final Color primaryColor;
+    private final Color secondaryColor;
     private boolean colorFlip = true;
 
-    protected ButtonRectangle(Coordinate2D initialLocation) {
+    protected ButtonRectangle(Coordinate2D initialLocation, Color primaryColor) {
         super(initialLocation, new Size(155, 60));
-        setFill(Color.color(0.47, 0.47, 0.49));
+        this.primaryColor = primaryColor;
+        this.secondaryColor = primaryColor.darker();
+
+        setFill(primaryColor);
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
         setArcHeight(10);
         setArcWidth(10);

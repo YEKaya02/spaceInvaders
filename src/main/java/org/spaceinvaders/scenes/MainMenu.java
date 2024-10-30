@@ -9,7 +9,7 @@ import com.github.hanyaeger.api.scenes.StaticScene;
 import javafx.scene.paint.Color;
 import org.spaceinvaders.SpaceInvaders;
 import org.spaceinvaders.UIEntities.button.Button;
-import org.spaceinvaders.UIEntities.button.MainMenuButton;
+import org.spaceinvaders.UIEntities.mainmenu.MainMenuButton;
 
 public class MainMenu extends StaticScene {
     private final CustomFont font = new CustomFont("fonts/TechnoRaceItalic.otf", 36);

@@ -21,11 +21,6 @@ public class EnemyTimer extends Timer {
 
     @Override
     public void onAnimationUpdate(long l) {
-        // If the gameOver state has been reached we return so that the enemy ships stops shooting.
-        if(gameScene.gameOver) {
-            return;
-        }
-
         if (random.nextInt(10) < 6) {
             ship.shoot(new Coordinate2D(ship.getLocation().getX(), ship.getLocation().getY() + 30), Direction.DOWN);
         }

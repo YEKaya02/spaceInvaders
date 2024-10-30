@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.entities.impl.CustomFont;
 import com.github.hanyaeger.api.entities.impl.TextEntity;
 import javafx.scene.paint.Color;
+import org.spaceinvaders.SpaceInvaders;
 
 public class GameOverScreen extends CompositeEntity {
     CustomFont font = new CustomFont("fonts/TechnoRaceItalic.otf", 36);
@@ -29,7 +30,7 @@ public class GameOverScreen extends CompositeEntity {
 
         entities[0] = new GameOverOverlay(gameSize);
         entities[1] = gameOverText;
-        entities[2] = new GameOverButton(new Coordinate2D(gameSize.width() /2, gameSize.height() /2 + 100), "Restart");
+        entities[2] = new GameOverButton(new Coordinate2D(gameSize.width() /2, gameSize.height() /2 + 100));
 
 
 

@@ -14,11 +14,14 @@ import javafx.scene.paint.Color;
 public abstract class Button extends CompositeEntity implements MouseEnterListener, MouseExitListener, MouseButtonReleasedListener {
     private final String buttonText;
     private final ButtonRectangle buttonRectangle;
+    private final Color textColor;
 
-    public Button(Coordinate2D initialLocation, String buttonText) {
+
+    public Button(Coordinate2D initialLocation, String buttonText, Color buttonRectangleColor, Color textColor) {
         super(initialLocation);
         this.buttonText = buttonText;
-        this.buttonRectangle = new ButtonRectangle(new Coordinate2D());
+        this.textColor = textColor;
+        this.buttonRectangle = new ButtonRectangle(new Coordinate2D(), buttonRectangleColor);
     }
 
     @Override
@@ -28,7 +31,7 @@ public abstract class Button extends CompositeEntity implements MouseEnterListen
         TextEntity text = new TextEntity(new Coordinate2D(), buttonText);
         text.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         text.setFont(new CustomFont("fonts/TechnoRaceItalic.otf", 32));
-        text.setFill(Color.WHITE);
+        text.setFill(textColor);
         addEntity(text);
     }
 

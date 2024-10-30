@@ -61,6 +61,7 @@ public class GameScene extends DynamicScene {
 
     public void gameOver(){
         gameOver = true;
+        pause();
         addEntity(new GameOverScreen(new Coordinate2D(), gameSize));
     }
 }

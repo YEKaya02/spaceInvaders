@@ -2,7 +2,7 @@ package org.spaceinvaders;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import org.spaceinvaders.UIEntities.LevelIndicator;
+import org.spaceinvaders.UIEntities.gamescene.LevelIndicator;
 import org.spaceinvaders.entities.ships.PlayerShip;
 import org.spaceinvaders.scenes.GameScene;
 
