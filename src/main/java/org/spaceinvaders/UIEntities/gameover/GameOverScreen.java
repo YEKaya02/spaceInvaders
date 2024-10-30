@@ -11,12 +11,14 @@ import javafx.scene.paint.Color;
 import org.spaceinvaders.SpaceInvaders;
 
 public class GameOverScreen extends CompositeEntity {
-    CustomFont font = new CustomFont("fonts/TechnoRaceItalic.otf", 36);
-    Size gameSize;
+    private final CustomFont font = new CustomFont("fonts/TechnoRaceItalic.otf", 36);
+    private final Size gameSize;
+    private final SpaceInvaders spaceInvaders;
 
-    public GameOverScreen(Coordinate2D initialLocation, Size gameSize) {
+    public GameOverScreen(Coordinate2D initialLocation, Size gameSize, SpaceInvaders spaceInvaders) {
         super(initialLocation);
         this.gameSize = gameSize;
+        this.spaceInvaders = spaceInvaders;
     }
 
     @Override
@@ -30,12 +32,14 @@ public class GameOverScreen extends CompositeEntity {
 
         entities[0] = new GameOverOverlay(gameSize);
         entities[1] = gameOverText;
-        entities[2] = new GameOverButton(new Coordinate2D(gameSize.width() /2, gameSize.height() /2 + 100));
-
-
+        entities[2] = new GameOverButton(new Coordinate2D(gameSize.width() /2, gameSize.height() /2 + 100), this);
 
         for (YaegerEntity entity : entities) {
             addEntity(entity);
         }
+    }
+
+    public void handleButtonPress(){
+        spaceInvaders.quit();
     }
 }

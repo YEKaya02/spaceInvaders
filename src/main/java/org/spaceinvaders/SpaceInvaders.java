@@ -25,7 +25,7 @@ public class SpaceInvaders extends YaegerGame {
     public void setupScenes() {
         YaegerScene[] scenes = new YaegerScene[2];
         scenes[0] = new MainMenu(gameSize, this);
-        scenes[1] = new GameScene(gameSize);
+        scenes[1] = new GameScene(gameSize, this);
 
         for (int i = 0; i < scenes.length; i++) {
             addScene(i, scenes[i]);

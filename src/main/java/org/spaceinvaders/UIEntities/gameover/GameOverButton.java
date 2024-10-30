@@ -6,12 +6,15 @@ import org.spaceinvaders.UIEntities.button.Button;
 import javafx.scene.paint.Color;
 
 public class GameOverButton extends Button {
-    public GameOverButton(Coordinate2D initialLocation) {
+    private final GameOverScreen gameOverScreen;
+
+    public GameOverButton(Coordinate2D initialLocation, GameOverScreen gameOverScreen) {
         super(initialLocation, "Exit", Color.rgb(255, 25, 25), Color.BLACK);
+        this.gameOverScreen = gameOverScreen;
     }
 
     @Override
     public void onMouseButtonReleased(MouseButton mouseButton, Coordinate2D coordinate2D) {
-
+        gameOverScreen.handleButtonPress();
     }
 }

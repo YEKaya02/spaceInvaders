@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import org.spaceinvaders.LevelManager;
+import org.spaceinvaders.SpaceInvaders;
 import org.spaceinvaders.UIEntities.gameover.GameOverScreen;
 import org.spaceinvaders.entities.ships.EnemyShip;
 import org.spaceinvaders.entities.ships.PlayerShip;
@@ -16,13 +17,15 @@ public class GameScene extends DynamicScene {
     private final Coordinate2D playerShipPosition;
     private final Size gameSize;
     private final LevelManager levelManager;
+    private final SpaceInvaders spaceInvaders;
     public boolean gameOver = false;
 
 
-    public GameScene(Size gameSize) {
+    public GameScene(Size gameSize, SpaceInvaders spaceInvaders) {
         this.playerShipPosition = new Coordinate2D(gameSize.width() / 2 , gameSize.height() / 1.2);
         this.gameSize = gameSize;
         this.levelManager = new LevelManager(gameSize, this);
+        this.spaceInvaders = spaceInvaders;
     }
 
     @Override
@@ -62,6 +65,6 @@ public class GameScene extends DynamicScene {
     public void gameOver(){
         gameOver = true;
         pause();
-        addEntity(new GameOverScreen(new Coordinate2D(), gameSize));
+        addEntity(new GameOverScreen(new Coordinate2D(), gameSize, spaceInvaders));
     }
 }
