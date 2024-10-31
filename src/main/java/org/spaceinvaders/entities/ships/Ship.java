@@ -10,7 +10,7 @@ import org.spaceinvaders.scenes.GameScene;
 
 import java.util.List;
 
-public abstract class Ship extends DynamicCompositeEntity implements Collided, Collider {
+public abstract class Ship extends DynamicCompositeEntity implements Collided {
     private final ShipSprite shipSprite;
     protected HealthBar healthBar;
     protected Coordinate2D healthBarPosition;

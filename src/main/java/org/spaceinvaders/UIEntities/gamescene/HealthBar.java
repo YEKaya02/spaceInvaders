@@ -16,7 +16,8 @@ public class HealthBar extends DynamicRectangleEntity {
         setArcWidth(10);
     }
 
-    @Override public void setWidth(double width) {
+    @Override
+    public void setWidth(double width) {
         super.setWidth(width);
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
