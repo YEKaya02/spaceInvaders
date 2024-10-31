@@ -28,7 +28,7 @@ public class EnemyShip extends Ship implements TimerContainer, SceneBorderCrossi
 
     @Override
     public void setupTimers() {
-        addTimer(new EnemyLogicTimer(500, this, gameScene));
+        addTimer(new EnemyLogicTimer(500, this));
     }
 
     public void move(){
