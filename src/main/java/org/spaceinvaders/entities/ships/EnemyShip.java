@@ -9,7 +9,7 @@ import org.spaceinvaders.timers.EnemyLogicTimer;
 
 import java.util.Random;
 
-public class EnemyShip extends Ship implements Collided, Collider, TimerContainer, SceneBorderCrossingWatcher {
+public class EnemyShip extends Ship implements TimerContainer, SceneBorderCrossingWatcher {
     private final Direction movingDirection;
     private final double speed;
 
